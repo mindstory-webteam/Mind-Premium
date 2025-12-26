@@ -181,13 +181,13 @@
                                 <nav class="tp-mobile-menu-active">
                                     <ul>
                                         <li>
-                                            <a href="index.html" class="active">Home</a>
+                                            <a href="#home" class="active">Home</a>
                                         </li>
                                         <li>
-                                            <a href="about.html">About</a>
+                                            <a href="#about">About</a>
                                         </li>
                                         <li>
-                                            <a href="service.html">Services</a>
+                                            <a href="#services">Services</a>
                                         </li>
                                         <li>
                                             <a href="portfolio.html">Portfolio</a>
@@ -268,26 +268,122 @@
     </style>
 
     <script>
-        // Add active class based on current page
+        // Smooth scroll and active state for anchor links
         document.addEventListener('DOMContentLoaded', function() {
-            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
             const menuLinks = document.querySelectorAll('.tp-header-menu nav ul li a');
+            const sections = document.querySelectorAll('section[id], div[id]');
             
+            // Smooth scroll functionality
             menuLinks.forEach(link => {
-                link.classList.remove('active');
-                const href = link.getAttribute('href');
-                if (href === currentPage || 
-                    (currentPage === '' && href === 'index.html') ||
-                    (currentPage.includes('about') && href === 'about.html') ||
-                    (currentPage.includes('service') && href === 'service.html') ||
-                    (currentPage.includes('portfolio') && href === 'portfolio.html') ||
-                    (currentPage.includes('blog') && href === 'blog.html') ||
-                    (currentPage.includes('contact') && href === 'contact.html')) {
-                    link.classList.add('active');
-                }
+                link.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    
+                    // If it's a hash link (section link)
+                    if (href.startsWith('#')) {
+                        e.preventDefault();
+                        const targetId = href.substring(1);
+                        const targetSection = document.getElementById(targetId);
+                        
+                        if (targetSection) {
+                            // Get the header height for offset
+                            const header = document.getElementById('header-sticky');
+                            const headerHeight = header ? header.offsetHeight : 0;
+                            
+                            // Calculate position
+                            const targetPosition = targetSection.offsetTop - headerHeight;
+                            
+                            // Smooth scroll to position
+                            window.scrollTo({
+                                top: targetPosition,
+                                behavior: 'smooth'
+                            });
+                            
+                            // Update active state
+                            menuLinks.forEach(l => l.classList.remove('active'));
+                            this.classList.add('active');
+                            
+                            // Update URL hash without jumping
+                            history.pushState(null, null, href);
+                        }
+                    }
+                });
             });
+            
+            // Scroll spy - highlight menu item based on scroll position
+            function highlightMenuOnScroll() {
+                let currentSection = '';
+                const header = document.getElementById('header-sticky');
+                const headerHeight = header ? header.offsetHeight : 0;
+                const scrollPosition = window.scrollY + headerHeight + 100;
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    const sectionId = section.getAttribute('id');
+                    
+                    if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                        currentSection = sectionId;
+                    }
+                });
+                
+                menuLinks.forEach(link => {
+                    link.classList.remove('active');
+                    const href = link.getAttribute('href');
+                    
+                    if (href === `#${currentSection}`) {
+                        link.classList.add('active');
+                    }
+                    // For page links (portfolio, blog, contact)
+                    else if (!href.startsWith('#')) {
+                        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+                        if (href === currentPage) {
+                            link.classList.add('active');
+                        }
+                    }
+                });
+            }
+            
+            // Run on scroll with throttling for better performance
+            let scrollTimeout;
+            window.addEventListener('scroll', function() {
+                if (scrollTimeout) {
+                    window.cancelAnimationFrame(scrollTimeout);
+                }
+                scrollTimeout = window.requestAnimationFrame(function() {
+                    highlightMenuOnScroll();
+                });
+            });
+            
+            // Run on page load
+            highlightMenuOnScroll();
+            
+            // Set active based on URL hash on page load
+            const hash = window.location.hash;
+            if (hash) {
+                menuLinks.forEach(link => {
+                    if (link.getAttribute('href') === hash) {
+                        link.classList.add('active');
+                    }
+                });
+                
+                // Scroll to the section after a small delay to ensure page is loaded
+                setTimeout(function() {
+                    const targetSection = document.querySelector(hash);
+                    if (targetSection) {
+                        const header = document.getElementById('header-sticky');
+                        const headerHeight = header ? header.offsetHeight : 0;
+                        const targetPosition = targetSection.offsetTop - headerHeight;
+                        
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                }, 100);
+            }
         });
     </script>
+
 
 
     <div id="smooth-wrapper">
@@ -296,7 +392,7 @@
             <main>
 
                 <!-- hero area start -->
-                <div class="dgm-hero-top pt-20">
+                <div class="dgm-hero-top pt-20" id="home">
                     <div class="dgm-hero-ptb grey-bg-2 fix z-index-1 p-relative">
                         <div class="dgm-hero-bg" data-background=""></div>
                         <div class="dgm-hero-rotate-text">
@@ -382,7 +478,7 @@
                 <!-- hero area end -->
 
                 <!-- about area start -->
-                <div class="dgm-about-area pt-120 pb-120">
+                <div class="dgm-about-area pt-120 pb-120" id="about">
                     <div class="container container-1230">
                         <div class="row">
                             <div class="col-lg-6">
@@ -522,7 +618,7 @@ Mind Premium is built on the belief that small details create powerful impact. W
                 <!-- step area end -->
 
                 <!-- service area end -->
-                <div class="dgm-service-area dgm-service-radius pt-120 black-bg-5 z-index-1">
+                <div class="dgm-service-area dgm-service-radius pt-120 black-bg-5 z-index-1" id="services">
                     <div class="container container-1230">
                         <div class="row">
                             <div class="col-xl-7">
@@ -1234,17 +1330,15 @@ Mind Premium is built on the belief that small details create powerful impact. W
                 <div class="dgm-testimonial-area dgm-testimonial-radius dgm-testimonial-space grey-bg-2 pt-120 pb-120 p-relative">
                     <div class="dgm-testimonial-bg" data-background="assets/img/home-03/testimonial/test-bg-shape.jpg"></div>
                     <div class="dgm-testimonial-thumb">
-                        <div class="anim-zoomin-wrap">
-                            <img class="anim-zoomin" src="assets/img/home-03/testimonial/test-bg.jpg" alt="">
-                        </div>
-                        <a class="popup-video dgm-testimonial-playbtn" href="https://www.youtube.com/watch?v=VCPGMjCW0is">
-                            <span>
-                                <svg width="20" height="24" viewBox="0 0 20 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M20 12L0.5 23.2583V0.74167L20 12Z" fill="currentcolor" />
-                                </svg>
-                            </span>
-                        </a>
-                    </div>
+    <iframe 
+        width="100%" 
+        height="100%" 
+        src="./assets/new-image/video/8089224-uhd_2160_4096_25fps.mp4"
+        frameborder="0" 
+        allow="autoplay; encrypted-media" 
+        allowfullscreen>
+    </iframe>
+</div>
                     <div class="container-fluid">
                         <div class="row justify-content-center">
                             <div class="offset-xl-6 col-xl-6 col-lg-8 col-md-9">
