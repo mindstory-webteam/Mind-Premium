@@ -339,7 +339,7 @@ li,
   --tp-common-yellow-1: #FFF669;
   --tp-common-yellow-green: #f89b1c;
   --tp-common-green-light: #D0FF71;
-  --tp-common-green-regular: #C1ED00;
+  --tp-common-green-regular: #51c5cd;
   --tp-common-green-1: #B4E717;
   --tp-common-green-solid: #17312F;
   --tp-common-pink-light: #FDE1DA;
@@ -27230,7 +27230,8 @@ body.tp-magic-cursor #magic-cursor {
   left: -30px;
   z-index: -1;
   color: transparent;
-  -webkit-text-stroke: 1px rgba(193, 237, 0, 0.6);
+  -webkit-text-stroke: 1px var(--tp-theme-green);
+  opacity: 0.5;
 }
 @media (max-width: 767px) {
   .dgm-step-number {
