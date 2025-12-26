@@ -1536,6 +1536,7 @@ input[type=color] {
   display: inline-block;
 }
 .tp-btn-yellow-green span span.text-1 {
+  color: white;
   position: relative;
   display: block;
   transition: 0.3s;
@@ -1545,6 +1546,7 @@ input[type=color] {
   top: 100%;
   display: block;
   transition: 0.3s;
+   color: white;
 }
 .tp-btn-yellow-green.lg {
   font-size: 16px;
@@ -5788,9 +5790,7 @@ body.tp-magic-cursor #magic-cursor {
   animation: 0.95s ease 0s normal forwards 1 running headerSlideDown;
   -webkit-animation: 0.95s ease 0s normal forwards 1 running headerSlideDown;
 }
-.header-sticky .tp-header-menu > nav > ul > li > a {
-  padding: 22px 0;
-}
+
 .header-sticky.sticky-white-bg {
   background: rgba(255, 255, 255, 0.9);
 }

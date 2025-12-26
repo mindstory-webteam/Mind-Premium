@@ -163,74 +163,7 @@
     <div class="body-overlay"></div>
     <!-- tp-offcanvus-area-end -->
 
-
-<header>
-
-        <!-- header area start -->
-        <div id="header-sticky" class="tp-header-area tp-header-ptb tp-header-blur sticky-white-bg header-transparent tp-header-3-style">
-            <div class="container container-1750">
-                <div class="row align-items-center">
-                    <div class="col-xl-1 col-lg-5 col-5">
-                        <div class="tp-header-logo">
-                            <a href="index.html"><img data-width="120" src="assets/new-image/MP_Logo.png" alt=""></a>
-                        </div>
-                    </div>
-                    <div class="col-xl-11 col-lg-7 col-7">
-                        <div class="tp-header-box d-flex align-items-center justify-content-end justify-content-xl-between">
-                            <div class="tp-header-menu tp-header-dropdown dropdown-white-bg d-none d-xl-flex">
-                                <nav class="tp-mobile-menu-active">
-                                    <ul>
-                                        <li>
-                                            <a href="#home" class="active">Home</a>
-                                        </li>
-                                        <li>
-                                            <a href="#about">About</a>
-                                        </li>
-                                        <li>
-                                            <a href="#services">Services</a>
-                                        </li>
-                                        <li>
-                                            <a href="portfolio.html">Portfolio</a>
-                                        </li>
-                                        <li>
-                                            <a href="blog.html">Blog</a>
-                                        </li>
-                                        <li>
-                                            <a href="contact.html">Contact</a>
-                                        </li>
-                                    </ul>
-                                </nav>
-                            </div>
-                            <div class="tp-header-btn d-none d-md-flex">
-                                <a class="tp-btn-yellow-green green-solid" href="contact.html">
-                                    <i>
-                                        <svg width="17" height="14" viewBox="0 0 17 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M16 2.5C16 1.675 15.325 1 14.5 1H2.5C1.675 1 1 1.675 1 2.5M16 2.5V11.5C16 12.325 15.325 13 14.5 13H2.5C1.675 13 1 12.325 1 11.5V2.5M16 2.5L8.5 7.75L1 2.5" stroke="currentcolor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                        </svg>
-                                    </i>
-                                    <span>
-                                        <span class="text-1">Send a message</span>
-                                        <span class="text-2">Send a message</span>
-                                    </span>
-                                </a>
-                            </div>
-                            <div class="tp-header-bar ml-15 d-xl-none">
-                                <button class="tp-offcanvas-open-btn">
-                                    <i></i>
-                                    <i></i>
-                                    <i></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- header area end -->
-
-    </header>
-
-    <style>
+<style>
         /* Navigation menu hover and active effects */
         .tp-header-menu nav ul li {
             display: inline-block;
@@ -240,8 +173,8 @@
             position: relative;
             display: inline-block;
             transition: color 0.3s ease;
-            padding: 0;
-            line-height: 1.5;
+            padding: 0 0 4px 0;
+            line-height: 1;
         }
 
         /* Underline effect */
@@ -265,126 +198,602 @@
         .tp-header-menu nav ul li a.active::after {
             width: 100%;
         }
+
+        /* Popup Modal Styles */
+        .popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .popup-overlay.show {
+            display: flex;
+            opacity: 1;
+        }
+
+        .popup-container {
+            background: #fff;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+            transform: scale(0.8);
+            transition: transform 0.3s ease;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .popup-overlay.show .popup-container {
+            transform: scale(1);
+        }
+
+        .popup-header {
+            padding: 25px 30px 20px;
+            border-bottom: 1px solid #e0e0e0;
+            position: relative;
+        }
+
+        .popup-header h2 {
+            margin: 0;
+            font-size: 24px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .popup-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: #666;
+            line-height: 1;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.3s ease;
+        }
+
+        .popup-close:hover {
+            color: #000;
+        }
+
+        .popup-body {
+            padding: 30px;
+        }
+
+        .popup-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            font-family: inherit;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #4CAF50;
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        /* Submit Button with your design style */
+        .tp-btn-yellow-green {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 30px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+          
+            color: #fff;
+            width: 100%;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .tp-btn-yellow-green:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .tp-btn-yellow-green:active {
+            transform: translateY(0);
+        }
+
+        .tp-btn-yellow-green i {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tp-btn-yellow-green i svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .tp-btn-yellow-green span span {
+            display: block;
+        }
+
+        .tp-btn-yellow-green span .text-2 {
+            display: none;
+        }
+
+        .tp-btn-yellow-green:hover span .text-1 {
+            display: none;
+        }
+
+        .tp-btn-yellow-green:hover span .text-2 {
+            display: block;
+        }
+
+        .tp-btn-yellow-green:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        .tp-btn-yellow-green:disabled:hover {
+            transform: none !important;
+            box-shadow: none;
+        }
+
+        /* Success message - Full screen display */
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: 60px 30px;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        .success-icon {
+            font-size: 100px;
+            margin-bottom: 25px;
+            animation: bounceIn 0.6s ease;
+            line-height: 1;
+        }
+
+        .success-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: #4CAF50;
+            margin-bottom: 15px;
+        }
+
+        .success-text {
+            font-size: 16px;
+            color: #666;
+            line-height: 1.6;
+            max-width: 350px;
+            margin: 0 auto;
+        }
+
+        @keyframes bounceIn {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* Hide form when success message is shown */
+        .popup-form.hide {
+            display: none;
+        }
+
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+            .popup-container {
+                width: 95%;
+                max-height: 85vh;
+            }
+
+            .popup-header {
+                padding: 20px;
+            }
+
+            .popup-body {
+                padding: 20px;
+            }
+
+            .popup-header h2 {
+                font-size: 20px;
+                padding-right: 30px;
+            }
+
+            .success-icon {
+                font-size: 80px;
+            }
+
+            .success-title {
+                font-size: 26px;
+            }
+
+            .success-text {
+                font-size: 14px;
+            }
+        }
     </style>
 
-    <script>
-        // Smooth scroll and active state for anchor links
-        document.addEventListener('DOMContentLoaded', function() {
-            const menuLinks = document.querySelectorAll('.tp-header-menu nav ul li a');
-            const sections = document.querySelectorAll('section[id], div[id]');
-            
-            // Smooth scroll functionality
-            menuLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    const href = this.getAttribute('href');
-                    
-                    // If it's a hash link (section link)
-                    if (href.startsWith('#')) {
-                        e.preventDefault();
-                        const targetId = href.substring(1);
-                        const targetSection = document.getElementById(targetId);
-                        
-                        if (targetSection) {
-                            // Get the header height for offset
-                            const header = document.getElementById('header-sticky');
-                            const headerHeight = header ? header.offsetHeight : 0;
-                            
-                            // Calculate position
-                            const targetPosition = targetSection.offsetTop - headerHeight;
-                            
-                            // Smooth scroll to position
-                            window.scrollTo({
-                                top: targetPosition,
-                                behavior: 'smooth'
-                            });
-                            
-                            // Update active state
-                            menuLinks.forEach(l => l.classList.remove('active'));
-                            this.classList.add('active');
-                            
-                            // Update URL hash without jumping
-                            history.pushState(null, null, href);
-                        }
-                    }
-                });
-            });
-            
-            // Scroll spy - highlight menu item based on scroll position
-            function highlightMenuOnScroll() {
-                let currentSection = '';
-                const header = document.getElementById('header-sticky');
-                const headerHeight = header ? header.offsetHeight : 0;
-                const scrollPosition = window.scrollY + headerHeight + 100;
+
+<header>
+    <!-- header area start -->
+    <div id="header-sticky" class="tp-header-area tp-header-ptb tp-header-blur sticky-white-bg header-transparent tp-header-3-style">
+        <div class="container container-1750">
+            <div class="row align-items-center">
+                <div class="col-xl-1 col-lg-5 col-5">
+                    <div class="tp-header-logo">
+                        <a href="index.html"><img data-width="120" src="assets/new-image/MP_Logo.png" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-xl-11 col-lg-7 col-7">
+                    <div class="tp-header-box d-flex align-items-center justify-content-end justify-content-xl-between">
+                        <div class="tp-header-menu tp-header-dropdown dropdown-white-bg d-none d-xl-flex">
+                            <nav class="tp-mobile-menu-active">
+                                <ul>
+                                    <li>
+                                        <a href="#home" class="active">Home</a>
+                                    </li>
+                                    <li>
+                                        <a href="#about">About</a>
+                                    </li>
+                                    <li>
+                                        <a href="#services">Services</a>
+                                    </li>
+                                    <li>
+                                        <a href="#projects">Projects</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                        <div class="tp-header-btn d-none d-md-flex">
+                            <a class="tp-btn-yellow-green green-solid" href="#" id="openPopupBtn">
+                                <i>
+                                    <svg width="17" height="14" viewBox="0 0 17 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M16 2.5C16 1.675 15.325 1 14.5 1H2.5C1.675 1 1 1.675 1 2.5M16 2.5V11.5C16 12.325 15.325 13 14.5 13H2.5C1.675 13 1 12.325 1 11.5V2.5M16 2.5L8.5 7.75L1 2.5" stroke="currentcolor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </i>
+                                <span>
+                                    <span class="text-1">Send a message</span>
+                                    <span class="text-2">Send a message</span>
+                                </span>
+                            </a>
+                        </div>
+                        <div class="tp-header-bar ml-15 d-xl-none">
+                            <button class="tp-offcanvas-open-btn">
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- header area end -->
+</header>
+
+<!-- Popup Modal -->
+<div class="popup-overlay" id="popupModal">
+    <div class="popup-container">
+        <div class="popup-header">
+            <h2>Send us a Message</h2>
+            <button class="popup-close" id="closePopupBtn">&times;</button>
+        </div>
+        <div class="popup-body">
+            <form class="popup-form" action="https://formspree.io/f/xkonnyar" method="POST" id="contactForm">
+                <div class="form-group">
+                    <label for="name">Your Name:</label>
+                    <input type="text" id="name" name="name" placeholder="Enter your name" required>
+                </div>
                 
-                sections.forEach(section => {
-                    const sectionTop = section.offsetTop;
-                    const sectionHeight = section.clientHeight;
-                    const sectionId = section.getAttribute('id');
-                    
-                    if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-                        currentSection = sectionId;
-                    }
-                });
+                <div class="form-group">
+                    <label for="email">Your Email:</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                </div>
                 
-                menuLinks.forEach(link => {
-                    link.classList.remove('active');
-                    const href = link.getAttribute('href');
-                    
-                    if (href === `#${currentSection}`) {
-                        link.classList.add('active');
-                    }
-                    // For page links (portfolio, blog, contact)
-                    else if (!href.startsWith('#')) {
-                        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-                        if (href === currentPage) {
-                            link.classList.add('active');
-                        }
-                    }
-                });
+                <div class="form-group">
+                    <label for="message">Your Message:</label>
+                    <textarea id="message" name="message" placeholder="Enter your message" required></textarea>
+                </div>
+                
+                <button type="submit" class="tp-btn-yellow-green green-solid">
+                    <i>
+                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2.4221 8.95389C1.66368 7.63144 1.29748 6.55158 1.07667 5.45697C0.750098 3.83806 1.49745 2.25665 2.7355 1.24758C3.25876 0.821106 3.85858 0.966814 4.168 1.52192L4.86655 2.77513C5.42023 3.76845 5.69707 4.26511 5.64216 4.79167C5.58725 5.31823 5.21389 5.74709 4.46718 6.6048L2.4221 8.95389ZM2.4221 8.95389C3.9572 11.6306 6.36627 14.041 9.04611 15.5779M9.04611 15.5779C10.3686 16.3363 11.4484 16.7025 12.543 16.9233C14.1619 17.2499 15.7434 16.5026 16.7524 15.2645C17.1789 14.7412 17.0332 14.1414 16.4781 13.832L15.2249 13.1335C14.2315 12.5798 13.7349 12.3029 13.2083 12.3578C12.6818 12.4127 12.2529 12.7861 11.3952 13.5328L9.04611 15.5779Z" stroke="currentcolor" stroke-width="1.5" stroke-linejoin="round" />
+                            <path d="M10.6001 4.86548C11.7387 5.34899 12.6511 6.26142 13.1346 7.4M11.1233 1C13.9531 1.81661 16.1834 4.04682 17.0001 6.8765" stroke="currentcolor" stroke-width="1.5" stroke-linecap="round" />
+                        </svg>
+                    </i>
+                    <span>
+                        <span class="text-1">Send Message</span>
+                        <span class="text-2">Send Message</span>
+                    </span>
+                </button>
+            </form>
+
+            <!-- Success Message -->
+            <div class="success-message" id="successMessage">
+                <div class="success-icon">😊</div>
+                <div class="success-title">Thank You!</div>
+                <div class="success-text">Your message has been sent successfully. We'll get back to you soon!</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Popup functionality
+    (function() {
+        const popupModal = document.getElementById('popupModal');
+        const openPopupBtn = document.getElementById('openPopupBtn');
+        const closePopupBtn = document.getElementById('closePopupBtn');
+        const contactForm = document.getElementById('contactForm');
+        const successMessage = document.getElementById('successMessage');
+        
+        // Function to open popup
+        function openPopup() {
+            popupModal.classList.add('show');
+            document.body.style.overflow = 'hidden'; // Prevent scrolling when popup is open
+            // Reset form and messages when opening
+            contactForm.classList.remove('hide');
+            successMessage.classList.remove('show');
+            contactForm.reset();
+        }
+        
+        // Function to close popup
+        function closePopup() {
+            popupModal.classList.remove('show');
+            document.body.style.overflow = ''; // Restore scrolling
+            // Reset after closing
+            setTimeout(function() {
+                contactForm.classList.remove('hide');
+                successMessage.classList.remove('show');
+                contactForm.reset();
+            }, 300);
+        }
+        
+        // Show popup automatically on page load (after 500ms delay for better UX)
+        window.addEventListener('load', function() {
+            setTimeout(openPopup, 500);
+        });
+        
+        // Open popup when clicking the button
+        openPopupBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            openPopup();
+        });
+        
+        // Close popup when clicking the close button
+        closePopupBtn.addEventListener('click', closePopup);
+        
+        // Close popup when clicking outside the popup container
+        popupModal.addEventListener('click', function(e) {
+            if (e.target === popupModal) {
+                closePopup();
             }
+        });
+        
+        // Close popup with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && popupModal.classList.contains('show')) {
+                closePopup();
+            }
+        });
+        
+        // Handle form submission with AJAX
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent default form submission
             
-            // Run on scroll with throttling for better performance
-            let scrollTimeout;
-            window.addEventListener('scroll', function() {
-                if (scrollTimeout) {
-                    window.cancelAnimationFrame(scrollTimeout);
+            const submitBtn = contactForm.querySelector('.tp-btn-yellow-green');
+            
+            // Disable button and show loading state
+            submitBtn.disabled = true;
+            
+            // Get form data
+            const formData = new FormData(contactForm);
+            
+            // Submit form using AJAX
+            fetch(contactForm.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
                 }
-                scrollTimeout = window.requestAnimationFrame(function() {
-                    highlightMenuOnScroll();
-                });
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Hide form and show success message
+                    contactForm.classList.add('hide');
+                    successMessage.classList.add('show');
+                    submitBtn.disabled = false;
+                    
+                    // Close popup after 4 seconds
+                    setTimeout(closePopup, 4000);
+                } else {
+                    return response.json().then(data => {
+                        throw new Error(data.error || 'Form submission failed');
+                    });
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Oops! There was a problem submitting your form. Please try again.');
+                submitBtn.disabled = false;
             });
-            
-            // Run on page load
-            highlightMenuOnScroll();
-            
-            // Set active based on URL hash on page load
-            const hash = window.location.hash;
-            if (hash) {
-                menuLinks.forEach(link => {
-                    if (link.getAttribute('href') === hash) {
-                        link.classList.add('active');
-                    }
-                });
+        });
+    })();
+
+    // Smooth scroll and active state for anchor links
+    document.addEventListener('DOMContentLoaded', function() {
+        const menuLinks = document.querySelectorAll('.tp-header-menu nav ul li a');
+        const sections = document.querySelectorAll('section[id], div[id]');
+        
+        // Smooth scroll functionality
+        menuLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
                 
-                // Scroll to the section after a small delay to ensure page is loaded
-                setTimeout(function() {
-                    const targetSection = document.querySelector(hash);
+                // If it's a hash link (section link)
+                if (href.startsWith('#')) {
+                    e.preventDefault();
+                    const targetId = href.substring(1);
+                    const targetSection = document.getElementById(targetId);
+                    
                     if (targetSection) {
+                        // Get the header height for offset
                         const header = document.getElementById('header-sticky');
                         const headerHeight = header ? header.offsetHeight : 0;
+                        
+                        // Calculate position
                         const targetPosition = targetSection.offsetTop - headerHeight;
                         
+                        // Smooth scroll to position
                         window.scrollTo({
                             top: targetPosition,
                             behavior: 'smooth'
                         });
+                        
+                        // Update active state
+                        menuLinks.forEach(l => l.classList.remove('active'));
+                        this.classList.add('active');
+                        
+                        // Update URL hash without jumping
+                        history.pushState(null, null, href);
                     }
-                }, 100);
-            }
+                }
+            });
         });
-    </script>
-
-
+        
+        // Scroll spy - highlight menu item based on scroll position
+        function highlightMenuOnScroll() {
+            let currentSection = '';
+            const header = document.getElementById('header-sticky');
+            const headerHeight = header ? header.offsetHeight : 0;
+            const scrollPosition = window.scrollY + headerHeight + 100;
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                const sectionId = section.getAttribute('id');
+                
+                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                    currentSection = sectionId;
+                }
+            });
+            
+            menuLinks.forEach(link => {
+                link.classList.remove('active');
+                const href = link.getAttribute('href');
+                
+                if (href === `#${currentSection}`) {
+                    link.classList.add('active');
+                }
+                // For page links (portfolio, blog, contact)
+                else if (!href.startsWith('#')) {
+                    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+                    if (href === currentPage) {
+                        link.classList.add('active');
+                    }
+                }
+            });
+        }
+        
+        // Run on scroll with throttling for better performance
+        let scrollTimeout;
+        window.addEventListener('scroll', function() {
+            if (scrollTimeout) {
+                window.cancelAnimationFrame(scrollTimeout);
+            }
+            scrollTimeout = window.requestAnimationFrame(function() {
+                highlightMenuOnScroll();
+            });
+        });
+        
+        // Run on page load
+        highlightMenuOnScroll();
+        
+        // Set active based on URL hash on page load
+        const hash = window.location.hash;
+        if (hash) {
+            menuLinks.forEach(link => {
+                if (link.getAttribute('href') === hash) {
+                    link.classList.add('active');
+                }
+            });
+            
+            // Scroll to the section after a small delay to ensure page is loaded
+            setTimeout(function() {
+                const targetSection = document.querySelector(hash);
+                if (targetSection) {
+                    const header = document.getElementById('header-sticky');
+                    const headerHeight = header ? header.offsetHeight : 0;
+                    const targetPosition = targetSection.offsetTop - headerHeight;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            }, 100);
+        }
+    });
+</script>
 
     <div id="smooth-wrapper">
         <div id="smooth-content" class="body-padding">
@@ -417,7 +826,7 @@
                                         </svg>
                                     </span>
                                 </a>
-                                <a href="#">
+                                <a href="https://www.instagram.com/mindpremium/" target="_blank">
                                     <span>
                                         <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M9 1.6207C11.4047 1.6207 11.6895 1.63125 12.6352 1.67344C13.5141 1.71211 13.9887 1.85977 14.3051 1.98281C14.7234 2.14453 15.0258 2.34141 15.3387 2.6543C15.6551 2.9707 15.8484 3.26953 16.0102 3.68789C16.1332 4.0043 16.2809 4.48242 16.3195 5.35781C16.3617 6.30703 16.3723 6.5918 16.3723 8.99297C16.3723 11.3977 16.3617 11.6824 16.3195 12.6281C16.2809 13.507 16.1332 13.9816 16.0102 14.298C15.8484 14.7164 15.6516 15.0187 15.3387 15.3316C15.0223 15.648 14.7234 15.8414 14.3051 16.0031C13.9887 16.1262 13.5105 16.2738 12.6352 16.3125C11.6859 16.3547 11.4012 16.3652 9 16.3652C6.59531 16.3652 6.31055 16.3547 5.36484 16.3125C4.48594 16.2738 4.01133 16.1262 3.69492 16.0031C3.27656 15.8414 2.97422 15.6445 2.66133 15.3316C2.34492 15.0152 2.15156 14.7164 1.98984 14.298C1.8668 13.9816 1.71914 13.5035 1.68047 12.6281C1.63828 11.6789 1.62773 11.3941 1.62773 8.99297C1.62773 6.58828 1.63828 6.30351 1.68047 5.35781C1.71914 4.47891 1.8668 4.0043 1.98984 3.68789C2.15156 3.26953 2.34844 2.96719 2.66133 2.6543C2.97773 2.33789 3.27656 2.14453 3.69492 1.98281C4.01133 1.85977 4.48945 1.71211 5.36484 1.67344C6.31055 1.63125 6.59531 1.6207 9 1.6207ZM9 0C6.55664 0 6.25078 0.0105469 5.29102 0.0527344C4.33477 0.0949219 3.67734 0.249609 3.10781 0.471094C2.51367 0.703125 2.01094 1.00898 1.51172 1.51172C1.00898 2.01094 0.703125 2.51367 0.471094 3.1043C0.249609 3.67734 0.0949219 4.33125 0.0527344 5.2875C0.0105469 6.25078 0 6.55664 0 9C0 11.4434 0.0105469 11.7492 0.0527344 12.709C0.0949219 13.6652 0.249609 14.3227 0.471094 14.8922C0.703125 15.4863 1.00898 15.9891 1.51172 16.4883C2.01094 16.9875 2.51367 17.2969 3.1043 17.5254C3.67734 17.7469 4.33125 17.9016 5.2875 17.9437C6.24727 17.9859 6.55312 17.9965 8.99648 17.9965C11.4398 17.9965 11.7457 17.9859 12.7055 17.9437C13.6617 17.9016 14.3191 17.7469 14.8887 17.5254C15.4793 17.2969 15.982 16.9875 16.4813 16.4883C16.9805 15.9891 17.2898 15.4863 17.5184 14.8957C17.7398 14.3227 17.8945 13.6687 17.9367 12.7125C17.9789 11.7527 17.9895 11.4469 17.9895 9.00352C17.9895 6.56016 17.9789 6.2543 17.9367 5.29453C17.8945 4.33828 17.7398 3.68086 17.5184 3.11133C17.2969 2.51367 16.991 2.01094 16.4883 1.51172C15.9891 1.0125 15.4863 0.703125 14.8957 0.474609C14.3227 0.253125 13.6688 0.0984375 12.7125 0.05625C11.7492 0.0105469 11.4434 0 9 0Z" fill="currentColor" />
@@ -599,7 +1008,7 @@ Mind Premium is built on the belief that small details create powerful impact. W
                                     <span class="dgm-step-number">02</span>
                                     <h4 class="dgm-step-title-sm">Production</h4>
                                     <p>
-                                      Crafting high-quality visuals with precision and detail.
+                                      Crafting premium, story-driven visuals with precision, detail, and purpose.
                                     </p>
                                 </div>
                             </div>
@@ -608,7 +1017,7 @@ Mind Premium is built on the belief that small details create powerful impact. W
                                     <span class="dgm-step-number">03</span>
                                     <h4 class="dgm-step-title-sm">Delivery</h4>
                                     <p>
-                                        Final visuals designed to connect, engage, and last.
+                                        Final visuals thoughtfully executed to connect, engage, and last.
                                     </p>
                                 </div>
                             </div>
@@ -911,7 +1320,7 @@ Mind Premium is built on the belief that small details create powerful impact. W
                 <!-- barnd area end -->
 
                 <!-- project area start -->
-                <div class="dgm-project-area black-bg-5 pb-120 fix">
+                <div class="dgm-project-area black-bg-5 pb-120 fix" id="projects">
                     <div class="container container-1330">
                         <div class="dgm-project-top-wrap">
                             <div class="row align-items-end">
@@ -1285,7 +1694,139 @@ Mind Premium is built on the belief that small details create powerful impact. W
                 </div>
                 <!-- team area end -->
 
-                <!-- brand area start -->
+              
+
+               <!-- testimonial area start -->
+<div class="dgm-testimonial-area dgm-testimonial-radius dgm-testimonial-space grey-bg-2 pt-120 pb-120 p-relative">
+    <div class="dgm-testimonial-bg" data-background="assets/img/home-03/testimonial/test-bg-shape.jpg"></div>
+    <div class="dgm-testimonial-thumb">
+        <div class="anim-zoomin-wrap">
+            <img class="anim-zoomin" src="assets/new-image/banner/focused-cameraman.jpg" alt="">
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="offset-xl-6 col-xl-6 col-lg-8 col-md-9">
+                <div class="dgm-testimonial-title-box text-center z-index-1 mb-45">
+                    <span class="tp-section-subtitle subtitle-grey mb-15 tp_fade_anim" data-delay=".3">Testimonials</span>
+                    <h4 class="tp-section-title-grotesk tp_fade_anim" data-delay=".5">
+                        What
+                        <span class="p-relative">
+                            clients say
+                            <span class="tp-section-title-shape d-none d-md-block">
+                                <svg width="300" height="15" viewBox="0 0 300 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M2.18518 11.5148C3.94801 12.9925 5.3191 13.3157 14.525 14.0545C24.3185 14.8395 26.2772 14.8395 57.8124 14.1007C92.2856 13.2695 116.378 12.8539 195.509 11.6995C253.487 10.8222 275.62 10.2219 288.548 9.25216C297.754 8.51334 298.341 8.32863 299.517 6.6201C300.3 5.60422 300.104 4.72686 299.125 4.63451C298.145 4.54216 297.95 3.94186 298.537 3.34157C299.321 2.64892 298.929 2.23333 297.362 2.23333C296.187 2.23333 295.795 2.00245 296.383 1.77157C296.97 1.49451 296.383 1.21745 295.012 1.07892C289.527 0.66333 265.239 0.478624 261.322 0.848036C259.167 1.07892 202.952 1.49451 136.552 1.72539C24.7103 2.18715 1.98931 2.46421 6.29846 3.4801C6.88607 3.6648 6.29846 4.21892 4.73149 4.77304C1.20582 6.0198 0.226471 7.35892 2.18518 8.09775C3.16453 8.46716 2.96866 8.69804 1.79343 8.69804C-0.752881 8.69804 -0.557011 9.20598 2.18518 11.5148ZM98.7493 9.62157C110.893 9.15981 136.161 8.9751 134.594 9.39069C133.223 9.66775 77.3994 11.0069 68.7811 10.9607C63.2968 10.9145 64.6679 10.776 74.0696 10.4989C81.121 10.268 92.2856 9.89863 98.7493 9.62157ZM70.544 4.68069C71.9151 4.81922 70.9357 4.91157 68.1935 4.91157C65.4513 4.91157 64.472 4.81922 65.6472 4.68069C67.0183 4.58833 69.3687 4.58833 70.544 4.68069ZM85.2343 3.29539C87.193 3.43392 86.0177 3.52627 82.8838 3.52627C79.554 3.52627 78.1829 3.43392 79.3581 3.29539C80.7292 3.20304 83.4714 3.20304 85.2343 3.29539ZM115.986 3.61863C122.254 3.61863 128.717 3.80333 130.676 4.08039C132.831 4.35745 126.955 4.49598 112.264 4.49598C95.2236 4.4498 92.0897 4.35745 97.5741 4.03421C101.296 3.80333 109.522 3.61863 115.986 3.61863ZM144.975 4.21892C146.542 4.35745 145.954 4.49598 143.8 4.49598C141.645 4.54216 140.47 4.40363 141.253 4.2651C141.841 4.12657 143.604 4.08039 144.975 4.21892ZM274.249 4.68069C275.816 4.81922 275.229 4.95775 273.074 4.95775C270.919 5.00392 269.744 4.86539 270.528 4.72686C271.115 4.58833 272.878 4.54216 274.249 4.68069Z" fill="url(#paint0_linear_5013_169)" />
+                                    <defs>
+                                        <linearGradient id="paint0_linear_5013_169" x1="384.814" y1="11.9742" x2="384.849" y2="8.71733" gradientUnits="userSpaceOnUse">
+                                             <stop offset="1" stop-color="#51c5cd" />
+                                                <stop offset="1" stop-color="#f89b1c" />
+                                        </linearGradient>
+                                    </defs>
+                                </svg>
+                            </span>
+                        </span> <br>
+                        about us
+                    </h4>
+                </div>
+                <div class="dgm-testimonial-slider-wrap z-index-1">
+                    <div class="siwper-container dgm-testimonial-active fix">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <div class="dgm-testimonial-slider-item text-center">
+                                    <div class="dgm-testimonial-quote">
+                                        <span>
+                                            <svg width="40" height="32" viewBox="0 0 40 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M15.417 2.25185V11.4963C15.417 13.6296 14.4936 16.079 12.6467 18.8444L4.33602 30.8148C3.77395 31.6049 3.01113 32 2.04757 32C0.682522 32 0 31.2099 0 29.6296V2.37037C0 0.790124 0.802967 0 2.4089 0H13.1285C14.6542 0 15.417 0.750615 15.417 2.25185Z" fill="currentcolor" />
+                                                <path d="M40 2.25185V11.4963C40 13.6296 39.0766 16.079 37.2298 18.8444L28.919 30.8148C28.357 31.6049 27.5942 32 26.6306 32C25.2656 32 24.583 31.2099 24.583 29.6296V2.37037C24.583 0.790124 25.386 0 26.9919 0H37.7115C39.2372 0 40 0.750615 40 2.25185Z" fill="currentcolor" />
+                                            </svg>
+                                        </span>
+                                    </div>
+                                    <div class="dgm-testimonial-text">
+                                        <p>
+                                            We will help you identify your target market, develop a marketing plan, and grow your customer base. We are committed to helping you succeed, and we will work with you every step of the way.
+                                        </p>
+                                    </div>
+                                    <div class="dgm-testimonial-author-wrap d-flex align-items-center justify-content-center">
+                                        <div class="dgm-testimonial-author p-relative">
+                                            <img class="dgm-testimonial-author-img" src="assets/img/home-03/avater/author-1.jpg" alt="">
+                                            <img class="dgm-testimonial-author-logo" src="assets/img/home-03/testimonial/testi-logo.png" alt="">
+                                        </div>
+                                        <div class="dgm-testimonial-author-info">
+                                            <h4 class="dgm-testimonial-author-name">Leslie Alexander
+                                            </h4>
+                                            <span>CEO at Specter</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="dgm-testimonial-slider-item text-center">
+                                    <div class="dgm-testimonial-quote">
+                                        <span>
+                                            <svg width="40" height="32" viewBox="0 0 40 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M15.417 2.25185V11.4963C15.417 13.6296 14.4936 16.079 12.6467 18.8444L4.33602 30.8148C3.77395 31.6049 3.01113 32 2.04757 32C0.682522 32 0 31.2099 0 29.6296V2.37037C0 0.790124 0.802967 0 2.4089 0H13.1285C14.6542 0 15.417 0.750615 15.417 2.25185Z" fill="currentcolor" />
+                                                <path d="M40 2.25185V11.4963C40 13.6296 39.0766 16.079 37.2298 18.8444L28.919 30.8148C28.357 31.6049 27.5942 32 26.6306 32C25.2656 32 24.583 31.2099 24.583 29.6296V2.37037C24.583 0.790124 25.386 0 26.9919 0H37.7115C39.2372 0 40 0.750615 40 2.25185Z" fill="currentcolor" />
+                                            </svg>
+                                        </span>
+                                    </div>
+                                    <div class="dgm-testimonial-text">
+                                        <p>
+                                            We will help you identify your target market, develop a marketing plan, and grow your customer base. We are committed to helping you succeed, and we will work with you every step of the way.
+                                        </p>
+                                    </div>
+                                    <div class="dgm-testimonial-author-wrap d-flex align-items-center justify-content-center">
+                                        <div class="dgm-testimonial-author p-relative">
+                                            <img class="dgm-testimonial-author-img" src="assets/img/home-03/avater/author-1.jpg" alt="">
+                                            <img class="dgm-testimonial-author-logo" src="assets/img/home-03/testimonial/testi-logo.png" alt="">
+                                        </div>
+                                        <div class="dgm-testimonial-author-info">
+                                            <h4 class="dgm-testimonial-author-name">Leslie Alexander
+                                            </h4>
+                                            <span>CEO at Specter</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="dgm-testimonial-slider-item text-center">
+                                    <div class="dgm-testimonial-quote">
+                                        <span>
+                                            <svg width="40" height="32" viewBox="0 0 40 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M15.417 2.25185V11.4963C15.417 13.6296 14.4936 16.079 12.6467 18.8444L4.33602 30.8148C3.77395 31.6049 3.01113 32 2.04757 32C0.682522 32 0 31.2099 0 29.6296V2.37037C0 0.790124 0.802967 0 2.4089 0H13.1285C14.6542 0 15.417 0.750615 15.417 2.25185Z" fill="currentcolor" />
+                                                <path d="M40 2.25185V11.4963C40 13.6296 39.0766 16.079 37.2298 18.8444L28.919 30.8148C28.357 31.6049 27.5942 32 26.6306 32C25.2656 32 24.583 31.2099 24.583 29.6296V2.37037C24.583 0.790124 25.386 0 26.9919 0H37.7115C39.2372 0 40 0.750615 40 2.25185Z" fill="currentcolor" />
+                                            </svg>
+                                        </span>
+                                    </div>
+                                    <div class="dgm-testimonial-text">
+                                        <p>
+                                            We will help you identify your target market, develop a marketing plan, and grow your customer base. We are committed to helping you succeed, and we will work with you every step of the way.
+                                        </p>
+                                    </div>
+                                    <div class="dgm-testimonial-author-wrap d-flex align-items-center justify-content-center">
+                                        <div class="dgm-testimonial-author p-relative">
+                                            <img class="dgm-testimonial-author-img" src="assets/img/home-03/avater/author-1.jpg" alt="">
+                                            <img class="dgm-testimonial-author-logo" src="assets/img/home-03/testimonial/testi-logo.png" alt="">
+                                        </div>
+                                        <div class="dgm-testimonial-author-info">
+                                            <h4 class="dgm-testimonial-author-name">Leslie Alexander
+                                            </h4>
+                                            <span>CEO at Specter</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dgm-testimonial-dot text-center"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- testimonial area end -->
+
+
+                  <!-- brand area start -->
                 <div class="dgm-brand-area fix">
                     <div class="dgm-brand-wrapper">
                         <div class="swiper-container dgm-brand-active">
@@ -1326,263 +1867,7 @@ Mind Premium is built on the belief that small details create powerful impact. W
                 </div>
                 <!-- brand area end -->
 
-                <!-- testimonial area start -->
-                <div class="dgm-testimonial-area dgm-testimonial-radius dgm-testimonial-space grey-bg-2 pt-120 pb-120 p-relative">
-                    <div class="dgm-testimonial-bg" data-background="assets/img/home-03/testimonial/test-bg-shape.jpg"></div>
-                    <div class="dgm-testimonial-thumb">
-    <iframe 
-        width="100%" 
-        height="100%" 
-        src="./assets/new-image/video/8089224-uhd_2160_4096_25fps.mp4"
-        frameborder="0" 
-        allow="autoplay; encrypted-media" 
-        allowfullscreen>
-    </iframe>
-</div>
-                    <div class="container-fluid">
-                        <div class="row justify-content-center">
-                            <div class="offset-xl-6 col-xl-6 col-lg-8 col-md-9">
-                                <div class="dgm-testimonial-title-box text-center z-index-1 mb-45">
-                                    <span class="tp-section-subtitle subtitle-grey mb-15 tp_fade_anim" data-delay=".3">Testimonials</span>
-                                    <h4 class="tp-section-title-grotesk tp_fade_anim" data-delay=".5">
-                                        What
-                                        <span class="p-relative">
-                                            clients say
-                                            <span class="tp-section-title-shape d-none d-md-block">
-                                                <svg width="300" height="15" viewBox="0 0 300 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M2.18518 11.5148C3.94801 12.9925 5.3191 13.3157 14.525 14.0545C24.3185 14.8395 26.2772 14.8395 57.8124 14.1007C92.2856 13.2695 116.378 12.8539 195.509 11.6995C253.487 10.8222 275.62 10.2219 288.548 9.25216C297.754 8.51334 298.341 8.32863 299.517 6.6201C300.3 5.60422 300.104 4.72686 299.125 4.63451C298.145 4.54216 297.95 3.94186 298.537 3.34157C299.321 2.64892 298.929 2.23333 297.362 2.23333C296.187 2.23333 295.795 2.00245 296.383 1.77157C296.97 1.49451 296.383 1.21745 295.012 1.07892C289.527 0.66333 265.239 0.478624 261.322 0.848036C259.167 1.07892 202.952 1.49451 136.552 1.72539C24.7103 2.18715 1.98931 2.46421 6.29846 3.4801C6.88607 3.6648 6.29846 4.21892 4.73149 4.77304C1.20582 6.0198 0.226471 7.35892 2.18518 8.09775C3.16453 8.46716 2.96866 8.69804 1.79343 8.69804C-0.752881 8.69804 -0.557011 9.20598 2.18518 11.5148ZM98.7493 9.62157C110.893 9.15981 136.161 8.9751 134.594 9.39069C133.223 9.66775 77.3994 11.0069 68.7811 10.9607C63.2968 10.9145 64.6679 10.776 74.0696 10.4989C81.121 10.268 92.2856 9.89863 98.7493 9.62157ZM70.544 4.68069C71.9151 4.81922 70.9357 4.91157 68.1935 4.91157C65.4513 4.91157 64.472 4.81922 65.6472 4.68069C67.0183 4.58833 69.3687 4.58833 70.544 4.68069ZM85.2343 3.29539C87.193 3.43392 86.0177 3.52627 82.8838 3.52627C79.554 3.52627 78.1829 3.43392 79.3581 3.29539C80.7292 3.20304 83.4714 3.20304 85.2343 3.29539ZM115.986 3.61863C122.254 3.61863 128.717 3.80333 130.676 4.08039C132.831 4.35745 126.955 4.49598 112.264 4.49598C95.2236 4.4498 92.0897 4.35745 97.5741 4.03421C101.296 3.80333 109.522 3.61863 115.986 3.61863ZM144.975 4.21892C146.542 4.35745 145.954 4.49598 143.8 4.49598C141.645 4.54216 140.47 4.40363 141.253 4.2651C141.841 4.12657 143.604 4.08039 144.975 4.21892ZM274.249 4.68069C275.816 4.81922 275.229 4.95775 273.074 4.95775C270.919 5.00392 269.744 4.86539 270.528 4.72686C271.115 4.58833 272.878 4.54216 274.249 4.68069Z" fill="url(#paint0_linear_5013_169)" />
-                                                    <defs>
-                                                        <linearGradient id="paint0_linear_5013_169" x1="384.814" y1="11.9742" x2="384.849" y2="8.71733" gradientUnits="userSpaceOnUse">
-                                                             <stop offset="1" stop-color="#51c5cd" />
-                                                                <stop offset="1" stop-color="#f89b1c" />
-                                                        </linearGradient>
-                                                    </defs>
-                                                </svg>
-                                            </span>
-                                        </span> <br>
-                                        about us
-                                    </h4>
-                                </div>
-                                <div class="dgm-testimonial-slider-wrap z-index-1">
-                                    <div class="siwper-container dgm-testimonial-active fix">
-                                        <div class="swiper-wrapper">
-                                            <div class="swiper-slide">
-                                                <div class="dgm-testimonial-slider-item text-center">
-                                                    <div class="dgm-testimonial-quote">
-                                                        <span>
-                                                            <svg width="40" height="32" viewBox="0 0 40 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                <path d="M15.417 2.25185V11.4963C15.417 13.6296 14.4936 16.079 12.6467 18.8444L4.33602 30.8148C3.77395 31.6049 3.01113 32 2.04757 32C0.682522 32 0 31.2099 0 29.6296V2.37037C0 0.790124 0.802967 0 2.4089 0H13.1285C14.6542 0 15.417 0.750615 15.417 2.25185Z" fill="currentcolor" />
-                                                                <path d="M40 2.25185V11.4963C40 13.6296 39.0766 16.079 37.2298 18.8444L28.919 30.8148C28.357 31.6049 27.5942 32 26.6306 32C25.2656 32 24.583 31.2099 24.583 29.6296V2.37037C24.583 0.790124 25.386 0 26.9919 0H37.7115C39.2372 0 40 0.750615 40 2.25185Z" fill="currentcolor" />
-                                                            </svg>
-                                                        </span>
-                                                    </div>
-                                                    <div class="dgm-testimonial-text">
-                                                        <p>
-                                                            We will help you identify your target market, develop a marketing plan, and grow your customer base. We are committed to helping you succeed, and we will work with you every step of the way.
-                                                        </p>
-                                                    </div>
-                                                    <div class="dgm-testimonial-author-wrap d-flex align-items-center justify-content-center">
-                                                        <div class="dgm-testimonial-author p-relative">
-                                                            <img class="dgm-testimonial-author-img" src="assets/img/home-03/avater/author-1.jpg" alt="">
-                                                            <img class="dgm-testimonial-author-logo" src="assets/img/home-03/testimonial/testi-logo.png" alt="">
-                                                        </div>
-                                                        <div class="dgm-testimonial-author-info">
-                                                            <h4 class="dgm-testimonial-author-name">Leslie Alexander
-                                                            </h4>
-                                                            <span>CEO at Specter</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="swiper-slide">
-                                                <div class="dgm-testimonial-slider-item text-center">
-                                                    <div class="dgm-testimonial-quote">
-                                                        <span>
-                                                            <svg width="40" height="32" viewBox="0 0 40 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                <path d="M15.417 2.25185V11.4963C15.417 13.6296 14.4936 16.079 12.6467 18.8444L4.33602 30.8148C3.77395 31.6049 3.01113 32 2.04757 32C0.682522 32 0 31.2099 0 29.6296V2.37037C0 0.790124 0.802967 0 2.4089 0H13.1285C14.6542 0 15.417 0.750615 15.417 2.25185Z" fill="currentcolor" />
-                                                                <path d="M40 2.25185V11.4963C40 13.6296 39.0766 16.079 37.2298 18.8444L28.919 30.8148C28.357 31.6049 27.5942 32 26.6306 32C25.2656 32 24.583 31.2099 24.583 29.6296V2.37037C24.583 0.790124 25.386 0 26.9919 0H37.7115C39.2372 0 40 0.750615 40 2.25185Z" fill="currentcolor" />
-                                                            </svg>
-                                                        </span>
-                                                    </div>
-                                                    <div class="dgm-testimonial-text">
-                                                        <p>
-                                                            We will help you identify your target market, develop a marketing plan, and grow your customer base. We are committed to helping you succeed, and we will work with you every step of the way.
-                                                        </p>
-                                                    </div>
-                                                    <div class="dgm-testimonial-author-wrap d-flex align-items-center justify-content-center">
-                                                        <div class="dgm-testimonial-author p-relative">
-                                                            <img class="dgm-testimonial-author-img" src="assets/img/home-03/avater/author-1.jpg" alt="">
-                                                            <img class="dgm-testimonial-author-logo" src="assets/img/home-03/testimonial/testi-logo.png" alt="">
-                                                        </div>
-                                                        <div class="dgm-testimonial-author-info">
-                                                            <h4 class="dgm-testimonial-author-name">Leslie Alexander
-                                                            </h4>
-                                                            <span>CEO at Specter</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="swiper-slide">
-                                                <div class="dgm-testimonial-slider-item text-center">
-                                                    <div class="dgm-testimonial-quote">
-                                                        <span>
-                                                            <svg width="40" height="32" viewBox="0 0 40 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                <path d="M15.417 2.25185V11.4963C15.417 13.6296 14.4936 16.079 12.6467 18.8444L4.33602 30.8148C3.77395 31.6049 3.01113 32 2.04757 32C0.682522 32 0 31.2099 0 29.6296V2.37037C0 0.790124 0.802967 0 2.4089 0H13.1285C14.6542 0 15.417 0.750615 15.417 2.25185Z" fill="currentcolor" />
-                                                                <path d="M40 2.25185V11.4963C40 13.6296 39.0766 16.079 37.2298 18.8444L28.919 30.8148C28.357 31.6049 27.5942 32 26.6306 32C25.2656 32 24.583 31.2099 24.583 29.6296V2.37037C24.583 0.790124 25.386 0 26.9919 0H37.7115C39.2372 0 40 0.750615 40 2.25185Z" fill="currentcolor" />
-                                                            </svg>
-                                                        </span>
-                                                    </div>
-                                                    <div class="dgm-testimonial-text">
-                                                        <p>
-                                                            We will help you identify your target market, develop a marketing plan, and grow your customer base. We are committed to helping you succeed, and we will work with you every step of the way.
-                                                        </p>
-                                                    </div>
-                                                    <div class="dgm-testimonial-author-wrap d-flex align-items-center justify-content-center">
-                                                        <div class="dgm-testimonial-author p-relative">
-                                                            <img class="dgm-testimonial-author-img" src="assets/img/home-03/avater/author-1.jpg" alt="">
-                                                            <img class="dgm-testimonial-author-logo" src="assets/img/home-03/testimonial/testi-logo.png" alt="">
-                                                        </div>
-                                                        <div class="dgm-testimonial-author-info">
-                                                            <h4 class="dgm-testimonial-author-name">Leslie Alexander
-                                                            </h4>
-                                                            <span>CEO at Specter</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="dgm-testimonial-dot text-center"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- testimonial area end -->
-
-                <!-- blog area start -->
-                <div class="dgm-blog-area pt-120 pb-120">
-                    <div class="container container-1330">
-                        <div class="dgm-blog-title-wrap mb-60">
-                            <div class="row align-items-end">
-                                <div class="col-lg-6 col-md-8">
-                                    <div class="dgm-blog-title-box">
-                                        <h4 class="tp-section-title-grotesk tp_fade_anim" data-delay=".3">The latest <br> industry trends</h4>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-4">
-                                    <div class="dgm-blog-btn text-start text-lg-end tp_fade_anim" data-delay=".3">
-                                        <a class="tp-btn-yellow-green green-solid btn-60" href="blog-grid-2-col-light.html">
-                                            <span>
-                                                <span class="text-1">Read all posts</span>
-                                                <span class="text-2">Read all posts</span>
-                                            </span>
-                                            <i>
-                                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M1 11L11 1M11 1H1M11 1V11" stroke="currentcolor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                                </svg>
-                                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M1 11L11 1M11 1H1M11 1V11" stroke="currentcolor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                                </svg>
-                                            </i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="dgm-blog-main">
-                            <div class="dgm-blog-item tp_fade_anim">
-                                <div class="row">
-                                    <div class="col-xl-7 col-lg-8">
-                                        <div class="dgm-blog-content-wrap d-flex">
-                                            <div class="dgm-blog-content d-flex flex-column justify-content-between">
-                                                <div class="dgm-blog-meta mb-30">
-                                                    <h4>Damien Cabral</h4>
-                                                    <span>Dec 10, 2025</span>
-                                                </div>
-                                                <div class="dgm-blog-category">
-                                                    <span>Marketing</span>
-                                                </div>
-                                            </div>
-                                            <div class="dgm-blog-title-box">
-                                                <h4 class="dgm-blog-title-sm"><a class="tp-line-black" href="blog-details-light.html">Simplicity is process the obvious and adding meaningful.</a></h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 offset-xl-2 col-lg-4">
-                                        <div class="dgm-blog-thumb-wrap text-start text-lg-end">
-                                            <div class="dgm-blog-thumb">
-                                                <a href="blog-details-light.html">
-                                                    <img src="assets/img/home-03/blog/blog-1.jpg" alt="">
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="dgm-blog-item tp_fade_anim">
-                                <div class="row">
-                                    <div class="col-xl-7 col-lg-8">
-                                        <div class="dgm-blog-content-wrap d-flex">
-                                            <div class="dgm-blog-content d-flex flex-column justify-content-between">
-                                                <div class="dgm-blog-meta mb-30">
-                                                    <h4>Elvin Bond</h4>
-                                                    <span>Sep 3, 2025</span>
-                                                </div>
-                                                <div class="dgm-blog-category">
-                                                    <span>Design</span>
-                                                </div>
-                                            </div>
-                                            <div class="dgm-blog-title-box">
-                                                <h4 class="dgm-blog-title-sm"><a class="tp-line-black" href="blog-details-light.html">Design can speak the in tongue of art force of commerce.</a></h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 offset-xl-2 col-lg-4">
-                                        <div class="dgm-blog-thumb-wrap text-start text-lg-end">
-                                            <div class="dgm-blog-thumb">
-                                                <a href="blog-details-light.html">
-                                                    <img src="assets/img/home-03/blog/blog-2.jpg" alt="">
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="dgm-blog-item tp_fade_anim">
-                                <div class="row">
-                                    <div class="col-xl-7 col-lg-8">
-                                        <div class="dgm-blog-content-wrap d-flex">
-                                            <div class="dgm-blog-content d-flex flex-column justify-content-between">
-                                                <div class="dgm-blog-meta mb-30">
-                                                    <h4>Ronald Lara</h4>
-                                                    <span>Aug 3, 2025</span>
-                                                </div>
-                                                <div class="dgm-blog-category">
-                                                    <span>Business</span>
-                                                </div>
-                                            </div>
-                                            <div class="dgm-blog-title-box">
-                                                <h4 class="dgm-blog-title-sm"><a class="tp-line-black" href="blog-details-light.html">Simplicity is removing the excess and focusing on what truly matters.</a></h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 offset-xl-2 col-lg-4">
-                                        <div class="dgm-blog-thumb-wrap text-start text-lg-end">
-                                            <div class="dgm-blog-thumb">
-                                                <a href="blog-details-light.html">
-                                                    <img src="assets/img/home-03/blog/blog-3.jpg" alt="">
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- blog area end -->
-
+                
             </main>
 
             <footer class="pb-20">
@@ -1596,10 +1881,10 @@ Mind Premium is built on the belief that small details create powerful impact. W
                                 <div class="col-xl-4 col-lg-4 col-md-6 mb-40">
                                     <div class="dgm-footer-widget dgm-footer-col-1 z-index-1 tp_fade_anim" data-delay=".3">
                                         <div class="dgm-footer-logo mb-30">
-                                            <a href="index.html"><img data-width="120px" src="assets/img/logo/logo-white.png" alt=""></a>
+                                            <a href="index.html"><img data-width="120px" src="assets/new-image/MP_Logo.png" alt="Mind Production"></a>
                                         </div>
                                         <div class="dgm-footer-widget-paragraph mb-35">
-                                            <p>We are committed to helping you succeed, and we will work with you every step of the way.</p>
+                                            <p>A premium visual production company focused on creativity, precision, and meaningful storytelling.</p>
                                         </div>
                                         <div class="dgm-footer-widget-social">
                                             <a href="#">
@@ -1704,29 +1989,29 @@ Mind Premium is built on the belief that small details create powerful impact. W
                             <div class="row align-items-center">
                                 <div class="col-xl-4 col-lg-5 col-md-6">
                                     <div class="tp-copyright-2-left text-center text-md-start z-index-1">
-                                        <p>© 2025 <a href="#">Agntix</a>. All Rights Reserved.</p>
+                                        <p>© 2025 <a href="#">Mind Premium</a>. All Rights Reserved.</p>
                                     </div>
                                 </div>
                                 <div class="col-xl-3 col-lg-3 d-none d-lg-block">
                                     <div class="tp-copyright-2-middle">
-                                        <a href="mailto:agntix@gmail.com">
+                                        <a href="mailto:hello@mindpremium.com">
                                             <span>
                                                 <svg width="18" height="16" viewBox="0 0 18 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M13 14.6H5C2.6 14.6 1 13.4 1 10.6V5C1 2.2 2.6 1 5 1H13C15.4 1 17 2.2 17 5V10.6C17 13.4 15.4 14.6 13 14.6Z" stroke="currentcolor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
                                                     <path d="M13 5.40039L10.496 7.40039C9.672 8.05639 8.32 8.05639 7.496 7.40039L5 5.40039" stroke="currentcolor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
                                                 </svg>
                                             </span>
-                                            agntix@gmail.com
+                                            hello@mindpremium.com
                                         </a>
                                     </div>
                                 </div>
                                 <div class="col-xl-5 col-lg-4 col-md-6">
                                     <div class="tp-copyright-2-right">
                                         <div class="tp-copyright-2-menu text-md-end text-center">
-                                            <ul>
+                                            <!-- <ul>
                                                 <li><a href="#">Privacy policy </a></li>
                                                 <li><a href="#">Terms and conditions</a></li>
-                                            </ul>
+                                            </ul> -->
                                         </div>
                                     </div>
                                 </div>
