@@ -793,6 +793,29 @@
             }, 100);
         }
     });
+
+    // Add event listener for "Call for Joining" button
+document.addEventListener('DOMContentLoaded', function() {
+    const openJoiningPopupBtn = document.getElementById('openJoiningPopupBtn');
+    
+    if (openJoiningPopupBtn) {
+        openJoiningPopupBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Trigger the popup opening function
+            const popupModal = document.getElementById('popupModal');
+            popupModal.classList.add('show');
+            document.body.style.overflow = 'hidden';
+            
+            // Reset form and messages when opening
+            const contactForm = document.getElementById('contactForm');
+            const successMessage = document.getElementById('successMessage');
+            contactForm.classList.remove('hide');
+            successMessage.classList.remove('show');
+            contactForm.reset();
+        });
+    }
+});
 </script>
 
     <div id="smooth-wrapper">
@@ -848,7 +871,7 @@
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="dgm-hero-content mb-120">
-                                        <span class="dgm-hero-subtitle tp_fade_anim" data-delay=".3">🔥 BEST MARKETING AGENCY</span>
+                                        <span class="dgm-hero-subtitle tp_fade_anim" data-delay=".3"></span>
                                         <h4 class="dgm-hero-title tp_fade_anim" data-delay=".5">
                             Creativity   <img class="dgm-hero-title-mike d-none d-md-inline-block" src="assets/img/home-03/hero/mike.png" alt="">
                                              That Drives Impact
@@ -980,18 +1003,18 @@ Mind Premium is built on the belief that small details create powerful impact. W
                             <div class="col-xl-3 col-lg-4 col-md-6">
                                 <div class="dgm-step-item p-relative dgm-step-space-1 mb-80">
                                     <h4 class="dgm-step-title mb-25">Explore the <br> creative process</h4>
-                                    <a class="tp-btn-yellow-green green-solid" href="contact.html">
-                                        <i>
-                                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M2.4221 8.95389C1.66368 7.63144 1.29748 6.55158 1.07667 5.45697C0.750098 3.83806 1.49745 2.25665 2.7355 1.24758C3.25876 0.821106 3.85858 0.966814 4.168 1.52192L4.86655 2.77513C5.42023 3.76845 5.69707 4.26511 5.64216 4.79167C5.58725 5.31823 5.21389 5.74709 4.46718 6.6048L2.4221 8.95389ZM2.4221 8.95389C3.9572 11.6306 6.36627 14.041 9.04611 15.5779M9.04611 15.5779C10.3686 16.3363 11.4484 16.7025 12.543 16.9233C14.1619 17.2499 15.7434 16.5026 16.7524 15.2645C17.1789 14.7412 17.0332 14.1414 16.4781 13.832L15.2249 13.1335C14.2315 12.5798 13.7349 12.3029 13.2083 12.3578C12.6818 12.4127 12.2529 12.7861 11.3952 13.5328L9.04611 15.5779Z" stroke="currentcolor" stroke-width="1.5" stroke-linejoin="round" />
-                                                <path d="M10.6001 4.86548C11.7387 5.34899 12.6511 6.26142 13.1346 7.4M11.1233 1C13.9531 1.81661 16.1834 4.04682 17.0001 6.8765" stroke="currentcolor" stroke-width="1.5" stroke-linecap="round" />
-                                            </svg>
-                                        </i>
-                                        <span>
-                                            <span class="text-1">Call for Joining</span>
-                                            <span class="text-2">Call for Joining</span>
-                                        </span>
-                                    </a>
+                                    <a class="tp-btn-yellow-green green-solid" href="#" id="openJoiningPopupBtn">
+    <i>
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2.4221 8.95389C1.66368 7.63144 1.29748 6.55158 1.07667 5.45697C0.750098 3.83806 1.49745 2.25665 2.7355 1.24758C3.25876 0.821106 3.85858 0.966814 4.168 1.52192L4.86655 2.77513C5.42023 3.76845 5.69707 4.26511 5.64216 4.79167C5.58725 5.31823 5.21389 5.74709 4.46718 6.6048L2.4221 8.95389ZM2.4221 8.95389C3.9572 11.6306 6.36627 14.041 9.04611 15.5779M9.04611 15.5779C10.3686 16.3363 11.4484 16.7025 12.543 16.9233C14.1619 17.2499 15.7434 16.5026 16.7524 15.2645C17.1789 14.7412 17.0332 14.1414 16.4781 13.832L15.2249 13.1335C14.2315 12.5798 13.7349 12.3029 13.2083 12.3578C12.6818 12.4127 12.2529 12.7861 11.3952 13.5328L9.04611 15.5779Z" stroke="currentcolor" stroke-width="1.5" stroke-linejoin="round" />
+            <path d="M10.6001 4.86548C11.7387 5.34899 12.6511 6.26142 13.1346 7.4M11.1233 1C13.9531 1.81661 16.1834 4.04682 17.0001 6.8765" stroke="currentcolor" stroke-width="1.5" stroke-linecap="round" />
+        </svg>
+    </i>
+    <span>
+        <span class="text-1">Call for Joining</span>
+        <span class="text-2">Call for Joining</span>
+    </span>
+</a>
                                 </div>
                             </div>
                             <div class="col-xl-3 col-lg-4 col-md-6">
@@ -1380,42 +1403,42 @@ Mind Premium is built on the belief that small details create powerful impact. W
                                 <div class="swiper-slide">
                                     <div class="dgm-project-item">
                                         <div class="dgm-project-thumb">
-                                            <img src="assets/img/home-03/project/project-1.jpg" alt="">
+                                            <img src="assets/new-image/projects/image-1.jpg" alt="">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="swiper-slide">
                                     <div class="dgm-project-item">
                                         <div class="dgm-project-thumb">
-                                            <img src="assets/img/home-03/project/project-2.jpg" alt="">
+                                            <img src="assets/new-image/projects/image-2.jpg" alt="">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="swiper-slide">
                                     <div class="dgm-project-item">
                                         <div class="dgm-project-thumb">
-                                            <img src="assets/img/home-03/project/project-3.jpg" alt="">
+                                            <img src="assets/new-image/projects/image-5.jpg" alt="">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="swiper-slide">
                                     <div class="dgm-project-item">
                                         <div class="dgm-project-thumb">
-                                            <img src="assets/img/home-03/project/project-1.jpg" alt="">
+                                            <img src="assets/new-image/projects/image-1.jpg" alt="">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="swiper-slide">
                                     <div class="dgm-project-item">
                                         <div class="dgm-project-thumb">
-                                            <img src="assets/img/home-03/project/project-2.jpg" alt="">
+                                            <img src="assets/new-image/projects/image-2.jpg" alt="">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="swiper-slide">
                                     <div class="dgm-project-item">
                                         <div class="dgm-project-thumb">
-                                            <img src="assets/img/home-03/project/project-3.jpg" alt="">
+                                            <img src="assets/new-image/projects/image-5.jpg" alt="">
                                         </div>
                                     </div>
                                 </div>
@@ -1508,20 +1531,7 @@ Mind Premium is built on the belief that small details create powerful impact. W
                                 </div>
                                 <div class="col-md-4">
                                     <div class="dgm-team-btn-box text-start text-md-end tp_fade_anim" data-delay=".3">
-                                        <a class="tp-btn-yellow-green green-solid btn-60" href="team-light.html">
-                                            <span>
-                                                <span class="text-1">All team member</span>
-                                                <span class="text-2">All team member</span>
-                                            </span>
-                                            <i>
-                                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M1 11L11 1M11 1H1M11 1V11" stroke="currentcolor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                                </svg>
-                                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M1 11L11 1M11 1H1M11 1V11" stroke="currentcolor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                                </svg>
-                                            </i>
-                                        </a>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -1533,38 +1543,14 @@ Mind Premium is built on the belief that small details create powerful impact. W
                                         <div class="dgm-team-thumb tp--hover-item p-relative">
                                             <a href="team-details-light.html">
                                                 <div class="tp--hover-img" data-displacement="assets/img/fluid.jpg" data-intensity="0.6" data-speedin="1" data-speedout="1">
-                                                    <img src="assets/img/home-03/team/team-1.jpg" alt="">
+                                                    <img src="assets/new-image/team/team-1.png" alt="">
                                                 </div>
                                             </a>
                                         </div>
                                         <div class="dgm-team-content">
-                                            <h4 class="dgm-team-title-sm"><a class="tp-line-black" href="team-details-light.html">Ethan Roberts</a></h4>
+                                            <h4 class="dgm-team-title-sm"><a class="tp-line-black" >Ethan Roberts</a></h4>
                                             <span>Marketing Leader</span>
-                                            <div class="dgm-team-social">
-                                                <a href="#">
-                                                    <span>
-                                                        <svg width="7" height="13" viewBox="0 0 7 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <path d="M7 0H5.09091C4.24704 0 3.43773 0.335226 2.84102 0.931933C2.24432 1.52864 1.90909 2.33795 1.90909 3.18182V5.09091H0V7.63636H1.90909V12.7273H4.45455V7.63636H6.36364L7 5.09091H4.45455V3.18182C4.45455 3.01304 4.52159 2.85118 4.64093 2.73184C4.76027 2.6125 4.92213 2.54545 5.09091 2.54545H7V0Z" fill="currentcolor" />
-                                                        </svg>
-                                                    </span>
-                                                </a>
-                                                <a href="#">
-                                                    <span>
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
-                                                            <path d="M9.4507 0.5H11.2908L7.27076 5.15949L12 11.5H8.29704L5.39675 7.65451L2.07815 11.5H0.236963L4.53678 6.51615L0 0.5H3.79697L6.41858 4.01492L9.4507 0.5ZM8.8049 10.3831H9.8245L3.24294 1.55826H2.1488L8.8049 10.3831Z" fill="currentcolor" />
-                                                        </svg>
-                                                    </span>
-                                                </a>
-                                                <a href="#">
-                                                    <span>
-                                                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <path d="M8.39996 3.59989C9.35474 3.59989 10.2704 3.97918 10.9455 4.65431C11.6207 5.32944 12 6.24512 12 7.1999V11.3999H9.59996V7.1999C9.59996 6.88164 9.47353 6.57642 9.24849 6.35137C9.02344 6.12633 8.71822 5.9999 8.39996 5.9999C8.0817 5.9999 7.77647 6.12633 7.55143 6.35137C7.32639 6.57642 7.19996 6.88164 7.19996 7.1999V11.3999H4.79995V7.1999C4.79995 6.24512 5.17924 5.32944 5.85437 4.65431C6.5295 3.97918 7.44518 3.59989 8.39996 3.59989Z" fill="#141414" />
-                                                            <path d="M2.4 4.19951H0V11.3995H2.4V4.19951Z" fill="#141414" />
-                                                            <path d="M1.2 2.4C1.86274 2.4 2.4 1.86274 2.4 1.2C2.4 0.537259 1.86274 0 1.2 0C0.537259 0 0 0.537259 0 1.2C0 1.86274 0.537259 2.4 1.2 2.4Z" fill="currentcolor" />
-                                                        </svg>
-                                                    </span>
-                                                </a>
-                                            </div>
+                                           
                                         </div>
                                     </div>
                                 </div>
@@ -1573,38 +1559,14 @@ Mind Premium is built on the belief that small details create powerful impact. W
                                         <div class="dgm-team-thumb tp--hover-item p-relative">
                                             <a href="team-details-light.html">
                                                 <div class="tp--hover-img" data-displacement="assets/img/fluid.jpg" data-intensity="0.6" data-speedin="1" data-speedout="1">
-                                                    <img src="assets/img/home-03/team/team-2.jpg" alt="">
+                                                    <img src="assets/new-image/team/team-2.png" alt="">
                                                 </div>
                                             </a>
                                         </div>
                                         <div class="dgm-team-content">
                                             <h4 class="dgm-team-title-sm"><a class="tp-line-black" href="team-details-light.html">Alex Jamie</a></h4>
                                             <span>Marketing Leader</span>
-                                            <div class="dgm-team-social">
-                                                <a href="#">
-                                                    <span>
-                                                        <svg width="7" height="13" viewBox="0 0 7 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <path d="M7 0H5.09091C4.24704 0 3.43773 0.335226 2.84102 0.931933C2.24432 1.52864 1.90909 2.33795 1.90909 3.18182V5.09091H0V7.63636H1.90909V12.7273H4.45455V7.63636H6.36364L7 5.09091H4.45455V3.18182C4.45455 3.01304 4.52159 2.85118 4.64093 2.73184C4.76027 2.6125 4.92213 2.54545 5.09091 2.54545H7V0Z" fill="currentcolor" />
-                                                        </svg>
-                                                    </span>
-                                                </a>
-                                                <a href="#">
-                                                    <span>
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
-                                                            <path d="M9.4507 0.5H11.2908L7.27076 5.15949L12 11.5H8.29704L5.39675 7.65451L2.07815 11.5H0.236963L4.53678 6.51615L0 0.5H3.79697L6.41858 4.01492L9.4507 0.5ZM8.8049 10.3831H9.8245L3.24294 1.55826H2.1488L8.8049 10.3831Z" fill="currentcolor" />
-                                                        </svg>
-                                                    </span>
-                                                </a>
-                                                <a href="#">
-                                                    <span>
-                                                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <path d="M8.39996 3.59989C9.35474 3.59989 10.2704 3.97918 10.9455 4.65431C11.6207 5.32944 12 6.24512 12 7.1999V11.3999H9.59996V7.1999C9.59996 6.88164 9.47353 6.57642 9.24849 6.35137C9.02344 6.12633 8.71822 5.9999 8.39996 5.9999C8.0817 5.9999 7.77647 6.12633 7.55143 6.35137C7.32639 6.57642 7.19996 6.88164 7.19996 7.1999V11.3999H4.79995V7.1999C4.79995 6.24512 5.17924 5.32944 5.85437 4.65431C6.5295 3.97918 7.44518 3.59989 8.39996 3.59989Z" fill="#141414" />
-                                                            <path d="M2.4 4.19951H0V11.3995H2.4V4.19951Z" fill="#141414" />
-                                                            <path d="M1.2 2.4C1.86274 2.4 2.4 1.86274 2.4 1.2C2.4 0.537259 1.86274 0 1.2 0C0.537259 0 0 0.537259 0 1.2C0 1.86274 0.537259 2.4 1.2 2.4Z" fill="currentcolor" />
-                                                        </svg>
-                                                    </span>
-                                                </a>
-                                            </div>
+                                           
                                         </div>
                                     </div>
                                 </div>
@@ -1613,38 +1575,14 @@ Mind Premium is built on the belief that small details create powerful impact. W
                                         <div class="dgm-team-thumb tp--hover-item p-relative">
                                             <a href="team-details-light.html">
                                                 <div class="tp--hover-img" data-displacement="assets/img/fluid.jpg" data-intensity="0.6" data-speedin="1" data-speedout="1">
-                                                    <img src="assets/img/home-03/team/team-3.jpg" alt="">
+                                                    <img src="assets/new-image/team/team-3.png" alt="">
                                                 </div>
                                             </a>
                                         </div>
                                         <div class="dgm-team-content">
                                             <h4 class="dgm-team-title-sm"><a class="tp-line-black" href="team-details-light.html">Taylor Same</a></h4>
                                             <span>Marketing Leader</span>
-                                            <div class="dgm-team-social">
-                                                <a href="#">
-                                                    <span>
-                                                        <svg width="7" height="13" viewBox="0 0 7 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <path d="M7 0H5.09091C4.24704 0 3.43773 0.335226 2.84102 0.931933C2.24432 1.52864 1.90909 2.33795 1.90909 3.18182V5.09091H0V7.63636H1.90909V12.7273H4.45455V7.63636H6.36364L7 5.09091H4.45455V3.18182C4.45455 3.01304 4.52159 2.85118 4.64093 2.73184C4.76027 2.6125 4.92213 2.54545 5.09091 2.54545H7V0Z" fill="currentcolor" />
-                                                        </svg>
-                                                    </span>
-                                                </a>
-                                                <a href="#">
-                                                    <span>
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
-                                                            <path d="M9.4507 0.5H11.2908L7.27076 5.15949L12 11.5H8.29704L5.39675 7.65451L2.07815 11.5H0.236963L4.53678 6.51615L0 0.5H3.79697L6.41858 4.01492L9.4507 0.5ZM8.8049 10.3831H9.8245L3.24294 1.55826H2.1488L8.8049 10.3831Z" fill="currentcolor" />
-                                                        </svg>
-                                                    </span>
-                                                </a>
-                                                <a href="#">
-                                                    <span>
-                                                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <path d="M8.39996 3.59989C9.35474 3.59989 10.2704 3.97918 10.9455 4.65431C11.6207 5.32944 12 6.24512 12 7.1999V11.3999H9.59996V7.1999C9.59996 6.88164 9.47353 6.57642 9.24849 6.35137C9.02344 6.12633 8.71822 5.9999 8.39996 5.9999C8.0817 5.9999 7.77647 6.12633 7.55143 6.35137C7.32639 6.57642 7.19996 6.88164 7.19996 7.1999V11.3999H4.79995V7.1999C4.79995 6.24512 5.17924 5.32944 5.85437 4.65431C6.5295 3.97918 7.44518 3.59989 8.39996 3.59989Z" fill="#141414" />
-                                                            <path d="M2.4 4.19951H0V11.3995H2.4V4.19951Z" fill="#141414" />
-                                                            <path d="M1.2 2.4C1.86274 2.4 2.4 1.86274 2.4 1.2C2.4 0.537259 1.86274 0 1.2 0C0.537259 0 0 0.537259 0 1.2C0 1.86274 0.537259 2.4 1.2 2.4Z" fill="currentcolor" />
-                                                        </svg>
-                                                    </span>
-                                                </a>
-                                            </div>
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -1660,31 +1598,7 @@ Mind Premium is built on the belief that small details create powerful impact. W
                                         <div class="dgm-team-content">
                                             <h4 class="dgm-team-title-sm"><a class="tp-line-black" href="team-details-light.html">Yoyo Casey</a></h4>
                                             <span>Marketing Leader</span>
-                                            <div class="dgm-team-social">
-                                                <a href="#">
-                                                    <span>
-                                                        <svg width="7" height="13" viewBox="0 0 7 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <path d="M7 0H5.09091C4.24704 0 3.43773 0.335226 2.84102 0.931933C2.24432 1.52864 1.90909 2.33795 1.90909 3.18182V5.09091H0V7.63636H1.90909V12.7273H4.45455V7.63636H6.36364L7 5.09091H4.45455V3.18182C4.45455 3.01304 4.52159 2.85118 4.64093 2.73184C4.76027 2.6125 4.92213 2.54545 5.09091 2.54545H7V0Z" fill="currentcolor" />
-                                                        </svg>
-                                                    </span>
-                                                </a>
-                                                <a href="#">
-                                                    <span>
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
-                                                            <path d="M9.4507 0.5H11.2908L7.27076 5.15949L12 11.5H8.29704L5.39675 7.65451L2.07815 11.5H0.236963L4.53678 6.51615L0 0.5H3.79697L6.41858 4.01492L9.4507 0.5ZM8.8049 10.3831H9.8245L3.24294 1.55826H2.1488L8.8049 10.3831Z" fill="currentcolor" />
-                                                        </svg>
-                                                    </span>
-                                                </a>
-                                                <a href="#">
-                                                    <span>
-                                                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <path d="M8.39996 3.59989C9.35474 3.59989 10.2704 3.97918 10.9455 4.65431C11.6207 5.32944 12 6.24512 12 7.1999V11.3999H9.59996V7.1999C9.59996 6.88164 9.47353 6.57642 9.24849 6.35137C9.02344 6.12633 8.71822 5.9999 8.39996 5.9999C8.0817 5.9999 7.77647 6.12633 7.55143 6.35137C7.32639 6.57642 7.19996 6.88164 7.19996 7.1999V11.3999H4.79995V7.1999C4.79995 6.24512 5.17924 5.32944 5.85437 4.65431C6.5295 3.97918 7.44518 3.59989 8.39996 3.59989Z" fill="#141414" />
-                                                            <path d="M2.4 4.19951H0V11.3995H2.4V4.19951Z" fill="#141414" />
-                                                            <path d="M1.2 2.4C1.86274 2.4 2.4 1.86274 2.4 1.2C2.4 0.537259 1.86274 0 1.2 0C0.537259 0 0 0.537259 0 1.2C0 1.86274 0.537259 2.4 1.2 2.4Z" fill="currentcolor" />
-                                                        </svg>
-                                                    </span>
-                                                </a>
-                                            </div>
+                                           
                                         </div>
                                     </div>
                                 </div>
@@ -1743,18 +1657,15 @@ Mind Premium is built on the belief that small details create powerful impact. W
                                     </div>
                                     <div class="dgm-testimonial-text">
                                         <p>
-                                            We will help you identify your target market, develop a marketing plan, and grow your customer base. We are committed to helping you succeed, and we will work with you every step of the way.
-                                        </p>
+Mind Premium transformed our ideas into a powerful visual story. Their attention to detail, creative direction, and cinematic quality exceeded our expectations. The final video truly elevated our brand presence                                        </p>
                                     </div>
                                     <div class="dgm-testimonial-author-wrap d-flex align-items-center justify-content-center">
-                                        <div class="dgm-testimonial-author p-relative">
-                                            <img class="dgm-testimonial-author-img" src="assets/img/home-03/avater/author-1.jpg" alt="">
-                                            <img class="dgm-testimonial-author-logo" src="assets/img/home-03/testimonial/testi-logo.png" alt="">
-                                        </div>
+                                        
                                         <div class="dgm-testimonial-author-info">
-                                            <h4 class="dgm-testimonial-author-name">Leslie Alexander
+                                            <h4 class="dgm-testimonial-author-name">Rahul Mehta
+
                                             </h4>
-                                            <span>CEO at Specter</span>
+                                            <span>Marketing Head, Nexa Solutions</span>
                                         </div>
                                     </div>
                                 </div>
@@ -1771,18 +1682,15 @@ Mind Premium is built on the belief that small details create powerful impact. W
                                     </div>
                                     <div class="dgm-testimonial-text">
                                         <p>
-                                            We will help you identify your target market, develop a marketing plan, and grow your customer base. We are committed to helping you succeed, and we will work with you every step of the way.
-                                        </p>
+Working with Mind Premium was seamless from start to finish. They understood our vision instantly and delivered high-impact videos that performed exceptionally well on social media.                                        </p>
                                     </div>
                                     <div class="dgm-testimonial-author-wrap d-flex align-items-center justify-content-center">
-                                        <div class="dgm-testimonial-author p-relative">
-                                            <img class="dgm-testimonial-author-img" src="assets/img/home-03/avater/author-1.jpg" alt="">
-                                            <img class="dgm-testimonial-author-logo" src="assets/img/home-03/testimonial/testi-logo.png" alt="">
-                                        </div>
+                                       
                                         <div class="dgm-testimonial-author-info">
-                                            <h4 class="dgm-testimonial-author-name">Leslie Alexander
+                                            <h4 class="dgm-testimonial-author-name">Ananya Rao
+
                                             </h4>
-                                            <span>CEO at Specter</span>
+                                            <span>Founder, Urban Glow</span>
                                         </div>
                                     </div>
                                 </div>
@@ -1799,18 +1707,15 @@ Mind Premium is built on the belief that small details create powerful impact. W
                                     </div>
                                     <div class="dgm-testimonial-text">
                                         <p>
-                                            We will help you identify your target market, develop a marketing plan, and grow your customer base. We are committed to helping you succeed, and we will work with you every step of the way.
-                                        </p>
+The team at Mind Premium knows how to capture emotion and convert it into visuals that sell. Our product video helped increase engagement and conversions within weeks.                                        </p>
                                     </div>
                                     <div class="dgm-testimonial-author-wrap d-flex align-items-center justify-content-center">
-                                        <div class="dgm-testimonial-author p-relative">
-                                            <img class="dgm-testimonial-author-img" src="assets/img/home-03/avater/author-1.jpg" alt="">
-                                            <img class="dgm-testimonial-author-logo" src="assets/img/home-03/testimonial/testi-logo.png" alt="">
-                                        </div>
+                                       
                                         <div class="dgm-testimonial-author-info">
-                                            <h4 class="dgm-testimonial-author-name">Leslie Alexander
+                                            <h4 class="dgm-testimonial-author-name">Arjun Verma
+
                                             </h4>
-                                            <span>CEO at Specter</span>
+                                            <span>E-commerce Manager, Trendora</span>
                                         </div>
                                     </div>
                                 </div>
@@ -1832,33 +1737,33 @@ Mind Premium is built on the belief that small details create powerful impact. W
                         <div class="swiper-container dgm-brand-active">
                             <div class="swiper-wrapper">
                                 <div class="swiper-slide">
-                                    <div class="dgm-brand-item">
-                                        <img src="assets/img/home-03/brand/brand-1.png" alt="">
+                                    <div class="dgm-brand-item" >
+                                        <img    style="width: 150px;" src="assets/new-image/logo/Chemmanur.webp" alt="">
                                     </div>
                                 </div>
                                 <div class="swiper-slide">
                                     <div class="dgm-brand-item">
-                                        <img src="assets/img/home-03/brand/brand-2.png" alt="">
+                                        <img  style="width: 150px;" src="assets/new-image/logo/Honda-Cars.webp" alt="">
                                     </div>
                                 </div>
                                 <div class="swiper-slide">
                                     <div class="dgm-brand-item">
-                                        <img src="assets/img/home-03/brand/brand-3.png" alt="">
+                                        <img style="width: 150px;" src="assets/new-image/logo/IndelMoney_mind.webp" alt="">
                                     </div>
                                 </div>
                                 <div class="swiper-slide">
                                     <div class="dgm-brand-item">
-                                        <img src="assets/img/home-03/brand/brand-4.png" alt="">
+                                        <img style="width: 150px;" src="assets/new-image/logo/Orgo-Yolks.webp" alt="">
                                     </div>
                                 </div>
                                 <div class="swiper-slide">
                                     <div class="dgm-brand-item">
-                                        <img src="assets/img/home-03/brand/brand-5.png" alt="">
+                                        <img style="width: 150px;"  src="assets/new-image/logo/Renov-Interiors.webp" alt="">
                                     </div>
                                 </div>
                                 <div class="swiper-slide">
                                     <div class="dgm-brand-item">
-                                        <img src="assets/img/home-03/brand/brand-6.png" alt="">
+                                        <img  style="width: 150px;" src="assets/new-image/logo/SPAIS.webp" alt="">
                                     </div>
                                 </div>
                             </div>
@@ -1926,32 +1831,19 @@ Mind Premium is built on the belief that small details create powerful impact. W
                                 </div>
                                 <div class="col-xl-2 col-lg-2  col-md-3 mb-40">
                                     <div class="dgm-footer-widget dgm-footer-col-2 tp_fade_anim" data-delay=".4">
-                                        <h4 class="dgm-footer-widget-title">Service</h4>
+                                        <h4 class="dgm-footer-widget-title">Links</h4>
                                         <div class="dgm-footer-widget-menu">
                                             <ul>
-                                                <li><a href="#">UI/UX Design</a></li>
-                                                <li><a href="#">Web Design</a></li>
-                                                <li><a href="#">Branding</a></li>
-                                                <li><a href="#">Webflow</a></li>
-                                                <li><a href="#">Development</a></li>
+                                                <li><a href="#home">Home</a></li>
+                                                <li><a href="#about">About us</a></li>
+                                                <li><a href="#services">Services</a></li>
+                                                <li><a href="#projects">Projects</a></li>
+                                               
                                             </ul>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-xl-2 col-lg-2 col-md-3 mb-40">
-                                    <div class="dgm-footer-widget dgm-footer-col-3 tp_fade_anim" data-delay=".5">
-                                        <h4 class="dgm-footer-widget-title">Company</h4>
-                                        <div class="dgm-footer-widget-menu">
-                                            <ul>
-                                                <li><a href="#">Home</a></li>
-                                                <li><a href="#">Agency</a></li>
-                                                <li><a href="#">Achievement</a></li>
-                                                <li><a href="#">Webflow</a></li>
-                                                <li><a href="#">Contact Us</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
+                                
                                 <div class="col-xl-4 col-lg-4 col-md-6 mb-40">
                                     <div class="dgm-footer-widget dgm-footer-col-4 z-index-1 tp_fade_anim" data-delay=".6">
                                         <h4 class="dgm-footer-widget-title">Newsletter</h4>
